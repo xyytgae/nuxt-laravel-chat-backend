@@ -16,10 +16,8 @@ Route::middleware(['cors'])->group(function () {
         Route::get('/user', function (Request $request) {
             return $request->user();
         });
-
-        // ログアウト
-        // Route::post('/logout', [LoginController::class, 'logout']);
     });
+    // ログアウト
     Route::get('/logout', [LoginController::class, 'logout']);
 
 
@@ -27,13 +25,8 @@ Route::middleware(['cors'])->group(function () {
     Route::get('/login', [LoginController::class, 'login']);
     Route::post('/login', [LoginController::class, 'login']);
 
-    // Route::get('/logout', [LoginController::class, 'logout']);
-
     // 新規登録
     Route::post('/register', [RegisterController::class, 'register']);
-
-    // ユーザー名取得
-    Route::get('/getUserName/{id}', [LoginController::class, 'getUserName']);
 
     // Route::middleware(['auth'])->group(function () {
     // Route::group(['middleware' => ['auth']], function () {

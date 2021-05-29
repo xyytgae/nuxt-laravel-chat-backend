@@ -42,23 +42,7 @@ class LoginController extends Controller
      */
     public function logout()
     {
-        Log::debug('ログアウト');
-        // var_dump('ログアウト');
         Auth::logout();
         return response()->json('Logout Success', Response::HTTP_OK);
-
-        // return $this->apiResponse('Logout Success', [], Response::HTTP_OK);
-    }
-
-    /**
-     * ユーザー名を取得
-     * 
-     * @return object
-     */
-
-    public function getUserName($id)
-    {
-        // return User::where('id', $id)->get();
-        return User::where('id', $id)->first();
     }
 }

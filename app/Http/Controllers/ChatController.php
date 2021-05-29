@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Chat;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ChatController extends Controller
 {
@@ -14,8 +15,11 @@ class ChatController extends Controller
      */
     public function index($id)
     {
-        // return Chat::where('room_id', $id)->get();
-        return Chat::where('room_id', $id)->orderBy('created_at', 'desc')
+        return DB::table('chats')
+            ->where('room_id', $id)
+            ->join('users', 'chats.user_id', '=', 'users.id')
+            ->select('chats.*', 'users.name')
+            ->latest()
             ->take(15)
             ->get();
     }
@@ -28,7 +32,6 @@ class ChatController extends Controller
     public function store(Request $request)
     {
         $message = Chat::create($request->all());
-        // event(new ChatMessageReceive($request->all()));
-        // return Chat::create($request->all());
+        // return $message;
     }
 }
